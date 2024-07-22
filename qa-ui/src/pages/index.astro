@@ -1,0 +1,9 @@
+---
+import Layout from "../layout/Layout.astro";
+import HomePage from "../components/courses/HomePage.svelte"
+
+---
+
+<Layout title = "Courses">
+  <HomePage client:only={"svelte"} />
+</Layout>

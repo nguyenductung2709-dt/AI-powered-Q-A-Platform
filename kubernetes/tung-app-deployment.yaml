@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tung-qa-ui-deployment
+  labels:
+    app: tung-qa-ui
+spec:
+  selector:
+    matchLabels:
+      app: tung-qa-ui
+  template:
+    metadata:
+      labels:
+        app: tung-qa-ui
+    spec:
+      containers:
+        - name: tung-qa-ui
+          image: tung-qa-ui:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3001
+          resources:
+            requests: 
+              cpu: 300m
+            limits: 
+              cpu: 500m
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tung-qa-api-deployment
+  labels:
+    app: tung-qa-api
+spec:
+  selector:
+    matchLabels:
+      app: tung-qa-api
+  template:
+    metadata:
+      labels:
+        app: tung-qa-api
+    spec:
+      containers:
+        - name: tung-qa-api
+          image: tung-qa-api:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 7777
+          resources:
+            requests: 
+              cpu: 300m
+            limits: 
+              cpu: 500m
+          env:
+            - name: PGPASS
+              valueFrom:
+                secretKeyRef:
+                  name: tung-app-database-cluster-app
+                  key: pgpass
+                  optional: false 
+
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llm-api
+  labels:
+    app: llm-api
+spec:
+  selector:
+    matchLabels:
+      app: llm-api
+  template:
+    metadata:
+      labels:
+        app: llm-api
+    spec:
+      containers:
+        - name: tung-llm-api
+          image: tung-llm-api:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 7000
+          resources:
+            requests: 
+              cpu: 300m
+            limits: 
+              cpu: 500m

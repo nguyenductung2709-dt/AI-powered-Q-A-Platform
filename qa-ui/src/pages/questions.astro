@@ -1,0 +1,12 @@
+---
+
+import Layout from "../layout/Layout.astro";
+import QuestionsComponent from "../components/questions/Questions.svelte"
+const { searchParams } = Astro.url;
+const id = searchParams.get('id') || '';
+
+---
+
+<Layout title = "Question">
+    <QuestionsComponent id={id} client:only={"svelte"} />
+</Layout>
