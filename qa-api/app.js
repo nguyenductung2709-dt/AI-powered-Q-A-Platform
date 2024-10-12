@@ -224,7 +224,7 @@ const initiateCommentGeneration = (questionId, description) => {
           const extractedStr = description;
           let remainder = str.replace(extractedStr, "");
           remainder = remainder.replace(/\n/g, '');
-          return answerService.addAnswer(questionId, remainder, "OPT-125M");
+          return answerService.addAnswer(questionId, remainder, "Llama-3.2-1B-Instruct");
         })
       )
         .then(() => {

@@ -1,3 +1,4 @@
 app-cache
 production-database-data
 node_modules
+.env

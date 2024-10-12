@@ -42,9 +42,14 @@ services:
       - qa-api
 
   llm-api:
-    build: llm-api
+    build:
+      context: llm-api
+      args:
+        HUGGINGFACE_TOKEN: ${HUGGINGFACE_TOKEN}  
     image: llm-api
     restart: "no"
+    environment:
+      - HUGGINGFACE_TOKEN=${HUGGINGFACE_TOKEN}
     expose:
       - 7000
 
